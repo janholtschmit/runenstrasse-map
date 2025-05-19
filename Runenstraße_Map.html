@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Runenstraße – Symbolkarte</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p0zLJfYlEYwRNNPp+T1rRjmy1XZ7G8pLmFFmW9ZbC6A="
+    crossorigin=""
+  />
+  <style>
+    html, body, #map { height: 100%; margin: 0; padding: 0; font-family: Fraktur, serif; background: #111; color: #fff; }
+    .leaflet-popup-content-wrapper {
+      background-color: #1b1b1b;
+      color: #e4e4e4;
+      border: 2px solid #444;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-V6ZFZ7vBjXm9bOebU6YpZdjBHGehCjMj6ItzEoefx38="
+    crossorigin=""
+  ></script>
+
+  <script>
+    const map = L.map('map').setView([51.2, 9.3], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© OpenStreetMap-Mitwirkende'
+    }).addTo(map);
+
+    const runenpunkte = [
+      {
+        coords: [51.2552, 7.1458],
+        name: "Elberfeld (Varieté Bavaria)",
+        symbol: "Währung + Bühne",
+        rune: "Kenaz (Feuer der Kunst)"
+      },
+      {
+        coords: [47.5989, 11.0672],
+        name: "Oberammergau",
+        symbol: "Ritualtheater, III/11",
+        rune: "Sowilo"
+      },
+      {
+        coords: [50.9271, 11.5892],
+        name: "Jena",
+        symbol: "Haeckel, Schädel, Kosmos",
+        rune: "Eiwaz + Ansuz + Sowilo"
+      },
+      {
+        coords: [51.4904, 9.1460],
+        name: "Warburg",
+        symbol: "Stadtwappen / Altstraße",
+        rune: "Othala"
+      },
+      {
+        coords: [51.5713, 8.1106],
+        name: "Soest",
+        symbol: "Plattdeutsch & Tiefer Keller",
+        rune: "Perthro + Eiwaz"
+      },
+      {
+        coords: [51.7194, 8.7544],
+        name: "Paderborn",
+        symbol: "Schmiede, Busdorfkirche, Eselgasse",
+        rune: "Tiwaz + Raidho + Mannaz"
+      }
+    ];
+
+    runenpunkte.forEach(({ coords, name, symbol, rune }) => {
+      L.marker(coords).addTo(map)
+        .bindPopup(`<b>${name}</b><br><i>${symbol}</i><br>Rune: <b>${rune}</b>`);
+    });
+  </script>
+</body>
+</html>
